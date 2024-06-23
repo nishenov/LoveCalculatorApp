@@ -13,9 +13,12 @@ class SecondActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        setContentView(binding.root)
         val percentage = intent.getStringExtra("percentage")
-        binding.tvResult.text = "Совместимость: $percentage%"
+        val sname = intent.getStringExtra("sname")
+        val fname = intent.getStringExtra("fname")
+        val result = intent.getStringExtra("result")
+        binding.tvResult.text = "Совместимость между $fname и $sname : $percentage%. $result"
 
     }
 }

@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
                         val loveResult = response.body()
                         val intent = Intent(this@MainActivity, SecondActivity::class.java)
                         intent.putExtra("percentage", loveResult?.percentage)
+                        intent.putExtra("fname", binding.etFirstName.text.toString())
+                        intent.putExtra("sname", loveResult?.sname)
+                        intent.putExtra("result", loveResult?.result)
                         startActivity(intent)
                     }
                 }
