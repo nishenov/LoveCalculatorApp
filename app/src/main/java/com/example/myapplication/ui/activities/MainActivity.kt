@@ -1,9 +1,11 @@
-package com.example.myapplication
+package com.example.myapplication.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.App
+import com.example.myapplication.data.models.LoveResult
 import com.example.myapplication.databinding.ActivityMainBinding
 import retrofit2.Response
 
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         val loveResult = response.body()
-                        val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                        val intent = Intent(this@MainActivity, ResultActivity::class.java)
                         intent.putExtra("percentage", loveResult?.percentage)
                         intent.putExtra("fname", binding.etFirstName.text.toString())
                         intent.putExtra("sname", loveResult?.sname)
