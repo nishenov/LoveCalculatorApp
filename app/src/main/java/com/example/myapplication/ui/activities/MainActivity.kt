@@ -1,7 +1,10 @@
 package com.example.myapplication.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.App
@@ -20,12 +23,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnResult.setOnClickListener {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+
+            binding.progressBar.visibility = View.VISIBLE
+            binding.etFirstName.visibility = View.GONE
+            binding.etSecondName.visibility = View.GONE
+            binding.btnResult.visibility = View.GONE
             App().api.getPercentage(
                 key = "5ca609edcemsh37fb5858eaaf930p1c12bejsnfc6d9b8ad6ab",
                 host = "love-calculator.p.rapidapi.com",
                 firstName = binding.etFirstName.text.toString(),
                 secondName = binding.etSecondName.text.toString()
-            )?.enqueue(object : retrofit2.Callback<LoveResult> {
+            ).enqueue(object : retrofit2.Callback<LoveResult> {
                 override fun onResponse(
                     call: retrofit2.Call<LoveResult>,
                     response: Response<LoveResult>
@@ -45,6 +55,18 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_SHORT).show()
                 }
             })
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
+            progressBar.visibility = View.GONE
+            etFirstName.visibility = View.VISIBLE
+            etSecondName.visibility = View.VISIBLE
+            btnResult.visibility = View.VISIBLE
+            etFirstName.text.clear()
+            etSecondName.text.clear()
         }
     }
 }
