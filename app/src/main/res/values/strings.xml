@@ -3,4 +3,12 @@
     <string name="first_name">First Name</string>
     <string name="second_name">Second Name</string>
     <string name="enter">Enter</string>
+    <string name="skip">Skip</string>
+    <string name="start">Start</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="comfortable">Все очень удобно</string>
+    <string name="find_your_soulmate">Find your soulmate</string>
+    <string name="get_fast_result">Get fast result</string>
+    <string name="easy_start">Easy start</string>
 </resources>

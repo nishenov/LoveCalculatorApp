@@ -2,14 +2,18 @@ package com.example.myapplication.ui.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.App
+import com.example.myapplication.R
 import com.example.myapplication.data.models.LoveResult
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.ui.fragments.OnBoardFragment
+import com.example.myapplication.util.PreferenceHelper
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
@@ -17,10 +21,17 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+    lateinit var sharedPreferences: PreferenceHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        sharedPreferences = PreferenceHelper().unit(this)
+        if (!sharedPreferences.isOnBoardShow){
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, OnBoardFragment())
+                .addToBackStack(null).commit()
+            sharedPreferences.isOnBoardShow =true
+        }
 
         binding.btnResult.setOnClickListener {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.example.myapplication.API.LoveApiService
 import com.example.myapplication.data.db.LoveDatabase
+import com.example.myapplication.util.PreferenceHelper
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,6 +21,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         getInstance()
+        val sharedPreferences = PreferenceHelper()
+        sharedPreferences.unit(this)
     }
 
     fun getInstance(): LoveDatabase? {
